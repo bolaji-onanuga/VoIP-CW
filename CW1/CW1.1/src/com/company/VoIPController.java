@@ -174,7 +174,7 @@ public class VoIPController {
 
     public void voiceFix(SocketType socketType, DatagramPacket datagramPacket) throws IOException {
 
-        long totalNumber = retrieveNumberFromBuffer(datagramPacket.getData());
+        long totalNumber = retrieveNumberFromBuffer(datagramPacket.getData(), socketType);
         byte[] pendingArray = packetStrip(datagramPacket.getData(), socketType);
         CRC32 validator = new CRC32();
         validator.update(pendingArray);
@@ -277,7 +277,7 @@ public class VoIPController {
 
                                 if (i == packetsReceived.size() - 1) {
 
-                                    savedNumber = current.packetID;
+                                    savedNumber = (int)(current.packetID);
                                 }
                             }
 
