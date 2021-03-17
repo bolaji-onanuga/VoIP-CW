@@ -15,7 +15,7 @@ public class NetworkCoursework {
     private static final int PORT = 8000;
     private static final AudioController audioController = new AudioController();
     private static VoIPController voipController;
-    private static ThreadedVoiceSender threadedVoiceSender;
+    //private static ThreadedVoiceSender threadedVoiceSender;
     private static ThreadedVoiceReceiver threadedVoiceReceiver;
     private static InetAddress clientIP;
 
@@ -32,17 +32,19 @@ public class NetworkCoursework {
         //TestPackets();
     }
 
+    /*
     private static void StartThreadedVoice() {
 
         threadedVoiceReceiver.start();
         threadedVoiceSender.start();
     }
+    */
 
     static void InitialiseThreads(SocketType socketType) {
 
         voipController = new VoIPController(socketType);
         threadedVoiceReceiver = new ThreadedVoiceReceiver(socketType);
-        threadedVoiceSender = new ThreadedVoiceSender(socketType);
+       // threadedVoiceSender = new ThreadedVoiceSender(socketType);
     }
 
     static void RecordTest() throws LineUnavailableException, IOException {

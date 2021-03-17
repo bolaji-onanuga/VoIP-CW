@@ -46,7 +46,7 @@ public class VoIPController {
 
     public void VoiceTransmission(int PORT, byte[] buffer, InetAddress clientIP, int number) throws IOException {
 
-        if (socketType = SocketType.Type4) {
+        if (socketType == SocketType.Type4) {
 
             CRC32 validator = new CRC32();
             validator.update(buffer);
@@ -289,7 +289,7 @@ public class VoIPController {
                     }
 
                     break;
-
+                    /*
                     case Type4:
 
                         if (processing) {
@@ -305,7 +305,7 @@ public class VoIPController {
                         } else {
 
                             audioPlayer.playBlock(current.packetData);
-                        }
+                        }*/
                 }
         }
     }

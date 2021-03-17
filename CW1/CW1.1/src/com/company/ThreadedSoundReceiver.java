@@ -11,7 +11,7 @@ import java.lang.Runnable;
 import java.net.*;
 import java.nio.ByteBuffer;
 
-public class ThreadedSoundReceiver implements Runnable{
+public class ThreadedSoundReceiver implements Runnable {
 
     static DatagramSocket receiving_socket;
     NetworkCoursework.SocketType socketType;

@@ -129,4 +129,14 @@ class CustomPackets implements Comparable<CustomPackets> {
             return freshArray;
         }
     }
+
+
+    @Override
+    public int compareTo(CustomPackets b){
+        if (this.packetID > b.packetID){
+            return 1;
+        } else if (this.packetID < b.packetID) {
+            return -1;
+        } else return 0;
+    }
 }

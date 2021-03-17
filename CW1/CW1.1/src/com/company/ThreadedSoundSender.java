@@ -5,18 +5,16 @@ package com.company;
  */
 
 import CMPC3M06.AudioRecorder;
-
 import javax.sound.sampled.LineUnavailableException;
 import java.io.IOException;
 import java.net.*;
 import java.nio.ByteBuffer;
 import static java.lang.System.exit;
-import static com.company.NetworkCoursework.SocketType.Type1;
+
 
 public class ThreadedSoundSender implements Runnable{
-
     static DatagramSocket sending_socket;
-   NetworkCoursework.SocketType socketType;
+    NetworkCoursework.SocketType socketType;
 
     public ThreadedSoundSender(NetworkCoursework.SocketType socketType){
         this.socketType = socketType;
@@ -29,11 +27,11 @@ public class ThreadedSoundSender implements Runnable{
 
     @Override
     public void run(){
-        //Port we are sending to
+        //Initialize the port we are sending to
         int port = 55555;
-        //IP address we are sending to
-        InetAddress clientIP = null;
 
+        //Initialize the IP address we're sending to
+        InetAddress clientIP = null;
         try {
             clientIP = InetAddress.getByName("192.168.0.11");   //My laptop's IP Address.
         } catch (UnknownHostException e){
@@ -42,6 +40,61 @@ public class ThreadedSoundSender implements Runnable{
             exit(0);
         }
 
+        /* This switch statement changes the functionality of our VOIP
+        system corresponding to the SocketType  being used          */
+        switch (socketType) {
+            case Type1: //DatagramSocket
+                //Open a socket to send sound from.
+                try {
+                    sending_socket = new DatagramSocket();
+                } catch (SocketException e){
+                    System.out.println("ERROR: ThreadedSoundSender: Could not open the sender socket.");
+                    e.printStackTrace();
+                    System.exit(0);
+                }
+
+                //Create & initialise AudioRecorder object.
+                AudioRecorder recorder = null;
+                try {
+                    recorder = new AudioRecorder();
+                } catch (LineUnavailableException e){
+                    System.out.println("ERROR: ThreadedSoundSender :Could not open line, because it is unavailable.");
+                    e.printStackTrace();
+                    System.exit(0);
+                }
+
+                //Set record & rend while loop condition to true then start
+                boolean isRunning = true;
+                while (isRunning){
+                    try {
+                        //Get byte array from AudioRecorder
+                        byte[] buffer = recorder.getBlock();
+
+                        //Add the byte array to packet, and send that packet to clientIP address.
+                        DatagramPacket packet = new DatagramPacket(buffer, buffer.length, clientIP, port);
+                        sending_socket.send(packet);
+                    } catch (IOException e){
+                        System.out.println("ERROR: ThreadedSoundSender: IO error occurred recording the audio.");
+                    }
+                }
+
+                sending_socket.close();
+                break;
+
+
+            case Type2: //DatagramSocket2
+                break;
+
+
+            case Type3: //DatagramSocket3
+                break;
+        }
+
+
+
+
+
+/*
         //Open a socket to send sound from.
         try {
             sending_socket = new DatagramSocket();
@@ -86,5 +139,6 @@ public class ThreadedSoundSender implements Runnable{
             }
        }
         sending_socket.close();
+        */
     }
 }
