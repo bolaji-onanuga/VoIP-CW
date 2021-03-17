@@ -6,7 +6,7 @@ package com.company;
 
 public class ThreadedSoundDuplex {
 
-    public  static void main(String[] args){
+    public static void main(String[] args){
         ThreadedSoundSender sender = new ThreadedSoundSender(NetworkCoursework.SocketType.Type1);
         ThreadedSoundReceiver rec  = new ThreadedSoundReceiver(NetworkCoursework.SocketType.Type1);
 
