@@ -7,10 +7,10 @@ package com.company;
 public class ThreadedSoundDuplex {
 
     public  static void main(String[] args){
-        ThreadedSoundReceiver rec  = new ThreadedSoundReceiver(NetworkCoursework.SocketType.Type2);
-        ThreadedSoundSender sender = new ThreadedSoundSender(NetworkCoursework.SocketType.Type2);
+        ThreadedSoundSender sender = new ThreadedSoundSender(NetworkCoursework.SocketType.Type1);
+        ThreadedSoundReceiver rec  = new ThreadedSoundReceiver(NetworkCoursework.SocketType.Type1);
+
         sender.start();
         rec.start();
-
     }
 }

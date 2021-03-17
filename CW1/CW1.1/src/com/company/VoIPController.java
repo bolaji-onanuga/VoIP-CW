@@ -35,7 +35,7 @@ public class VoIPController {
     private ArrayList<CustomPackets> packetsReceived = new ArrayList<CustomPackets>();
     private byte[] empty = new byte[512];
 
-    private CustomPackets emptypackets = new CustomPackets(0, empty);
+    private CustomPackets emptyPackets = new CustomPackets(0, empty);
     private CustomPackets previous = null;
     private CustomPackets[][] packetArray = new CustomPackets[squareRoot][squareRoot];
     private CustomPackets previous1 = new CustomPackets(0, new byte[512]);
@@ -228,7 +228,7 @@ public class VoIPController {
                                         audioPlayer.playBlock(arraySort[k - 3].packetData);
                                     } else {
 
-                                        audioPlayer.playBlock((emptypackets.packetData));
+                                        audioPlayer.playBlock((emptyPackets.packetData));
                                     }
                                 }
                             }
@@ -272,7 +272,7 @@ public class VoIPController {
                                     audioPlayer.playBlock(packetsReceived.get(i - 1).packetData);
                                 } else if (i == 0) {
 
-                                    audioPlayer.playBlock(emptypackets.packetData);
+                                    audioPlayer.playBlock(emptyPackets.packetData);
                                 }
 
                                 if (i == packetsReceived.size() - 1) {
